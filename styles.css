@@ -1,0 +1,96 @@
+/* General styles for the body */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+/* Container for widgets */
+.widget-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between widgets */
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style for each widget */
+.widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px; /* Default width */
+    height: 300px; /* Default height */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    position: relative; /* Needed for the resize handle positioning */
+    overflow: hidden;
+}
+
+/* Resize handle */
+.resize-handle {
+    width: 10px; /* Smaller width */
+    height: 10px; /* Smaller height */
+    background-color: #000; /* Black color */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize; /* Southeast resize cursor */
+}
+
+/* Style for iframe elements */
+iframe {
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Style for timer display */
+#timer {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Style for buttons */
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+/* Style for Spotify widget */
+#spotify-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#spotify-iframe {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Style for poll widget options */
+.poll-option {
+    display: block;
+    margin-bottom: 5px;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Notice Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="widget-container">
+        <div class="widget" id="google-slides-widget">
+            <h2>Google Slides</h2>
+            <iframe src="https://docs.google.com/presentation/d/1jK6n59WK30I09k8ot73OJTZe90klnKrOCnA9v55sS2g/edit#slide=id.p1" frameborder="0" allowfullscreen="true"></iframe>
+            <div class="resize-handle"></div>
+        </div>
+        <div class="widget" id="google-spreadsheet-widget">
+            <h2>Google Spreadsheet</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/1D7D_aS-OkQVFMDF-2GCV2mryJ0ChQFuhiyYWRJvmu6o/edit?gid=0#gid=0" frameborder="0" allowfullscreen="true"></iframe>
+            <div class="resize-handle"></div>
+        </div>
+        <div class="widget" id="pomodoro-widget">
+            <h2>Pomodoro Timer</h2>
+            <div id="timer">
+                <span id="minutes">25</span>:<span id="seconds">00</span>
+            </div>
+            <button id="start-timer">Start</button>
+            <button id="reset-timer">Reset</button>
+            <div class="resize-handle"></div>
+        </div>
+        <div class="widget" id="poll-widget-container">
+            <!-- Poll widget content will be injected here by script.js -->
+            <div class="resize-handle"></div>
+        </div>
+        <div class="widget" id="spotify-widget">
+            <h2>Spotify Player</h2>
+            <div id="spotify-player">
+                <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+            <div class="resize-handle"></div>
+        </div>
+    
+    <!-- ChatGPT Widget -->
+    <div class="widget" id="chat-widget">
+        <h2>ChatGPT</h2>
+        <input type="text" id="chat-input" placeholder="Ask a question...">
+        <button id="chat-submit">Ask</button>
+        <div id="chat-response"></div>
+        <div class="resize-handle"></div>
+    </div>
+    </div>
+   
+        <!-- Other widgets here -->
+        
+
+    <script src="script.js"></script>
+</body>
+</html>

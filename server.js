@@ -1,51 +1,41 @@
 const express = require('express');
-const { google } = require('googleapis');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const { Configuration, OpenAIApi } = require('openai');
+
+// Load environment variables from .env file
+dotenv.config();
+
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
+
+const configuration = new Configuration({
+  apiKey: process.env.OPEN_AI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
 
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-const CLIENT_ID = '585815660266-4lclfucl7blqtpthi9otjuuk7jfcg37o.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'YOUR_REDIRECT_URI';
-const REFRESH_TOKEN = 'YOUR_REFRESH_TOKEN';
+app.post('/chat', async (req, res) => {
+  const { message } = req.body;
 
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: message }],
+    });
 
-const slides = google.slides({ version: 'v1', auth: oAuth2Client });
-
-// app.get('/', (req, res) => {
-//     res.send('Welcome to the Google Slides API Integration!');
-// });
-
-app.get('/', async (req, res) => {
-    try {
-        const presentationId = '1lcbj4kx2qyHYonAXcdVomj0egWVuRHwuAAFzMbBSSrw';
-        const response = await slides.presentations.get({
-            presentationId: presentationId,
-        });
-
-        const slidesData = response.data.slides.map(slide => {
-            return {
-                title: slide.pageElements
-                    .filter(element => element.shape && element.shape.text)
-                    .map(element => element.shape.text.textElements.map(te => te.textRun ? te.textRun.content : '').join(''))
-                    .join(''),
-                content: slide.pageElements
-                    .filter(element => element.shape && element.shape.text)
-                    .map(element => element.shape.text.textElements.map(te => te.textRun ? te.textRun.content : '').join(''))
-                    .join('\n')
-            };
-        });
-
-        res.json(slidesData);
-    } catch (error) {
-        res.status(500).send(error.toString());
-    }
+    const chatResponse = response.data.choices[0].message.content;
+    res.json({ message: chatResponse });
+  } catch (error) {
+    res.status(500).json({ message: 'Error: Unable to fetch response.' });
+  }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
+
+

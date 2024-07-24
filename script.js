@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to start the Pomodoro Timer
     const startTimer = () => {
+        clearInterval(timer);
         timer = setInterval(() => {
             if (seconds === 0) {
                 if (minutes === 0) {
@@ -37,92 +38,86 @@ document.addEventListener('DOMContentLoaded', function () {
         updateTimerDisplay();
     };
 
+    // Function to start a short break
+    const startShortBreak = () => {
+        clearInterval(timer);
+        minutes = 5;
+        seconds = 0;
+        updateTimerDisplay();
+        startTimer();
+    };
+
+    // Function to start a long break
+    const startLongBreak = () => {
+        clearInterval(timer);
+        minutes = 15;
+        seconds = 0;
+        updateTimerDisplay();
+        startTimer();
+    };
+
     // Event listeners for Pomodoro Timer
     document.getElementById('start-timer').addEventListener('click', startTimer);
     document.getElementById('reset-timer').addEventListener('click', resetTimer);
+    document.getElementById('short-break').addEventListener('click', startShortBreak);
+    document.getElementById('long-break').addEventListener('click', startLongBreak);
 
     // Initialize Pomodoro Timer display
     updateTimerDisplay();
 
-    // Poll Widget Initialization
-    const pollData = [
-        { question: 'What is your favorite color?', options: ['Red', 'Blue', 'Green', 'Yellow'] },
-        { question: 'What is your favorite programming language?', options: ['JavaScript', 'Python', 'Java', 'C++'] }
-    ];
-
-    const initializePollWidget = () => {
-        const pollContainer = document.getElementById('poll-widget-container');
-        pollContainer.innerHTML = '<h2>Poll</h2>'; // Clear previous content and add title
-
-        pollData.forEach(poll => {
-            const pollQuestion = document.createElement('div');
-            pollQuestion.innerHTML = `<h3>${poll.question}</h3>`;
-            
-            poll.options.forEach(option => {
-                const optionLabel = document.createElement('label');
-                optionLabel.className = 'poll-option';
-                optionLabel.innerHTML = `<input type="radio" name="${poll.question}" value="${option}"> ${option}`;
-                pollQuestion.appendChild(optionLabel);
-                pollQuestion.appendChild(document.createElement('br'));
-            });
-            
-            pollContainer.appendChild(pollQuestion);
-        });
-
-        const submitButton = document.createElement('button');
-        submitButton.textContent = 'Submit Poll';
-        submitButton.addEventListener('click', () => {
-            pollContainer.innerHTML = '<h2>No new poll</h2>'; // Display message after submission
-        });
-
-        pollContainer.appendChild(submitButton);
-    };
-
-    // Initialize Poll Widget
-    initializePollWidget();
-
-    // ChatGPT Widget Initialization
-    const askQuestion = async () => {
-        const question = document.getElementById('chat-input').value;
-        const responseContainer = document.getElementById('chat-response');
+    // Fetch and display a random quote
+    const fetchQuote = async () => {
+        const quoteContainer = document.getElementById('quote');
 
         try {
-            const response = await fetch('http://localhost:3000/ask', {
+            const response = await fetch('https://api.quotable.io/random');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            quoteContainer.textContent = `"${data.content}" - ${data.author}`;
+        } catch (error) {
+            quoteContainer.textContent = 'Error: Unable to fetch quote.';
+        }
+    };
+
+    fetchQuote();
+    const chatboxMessages = document.getElementById('chatbox-messages');
+    const chatboxInput = document.getElementById('chatbox-input');
+    const chatboxSend = document.getElementById('chatbox-send');
+
+    const appendMessage = (role, message) => {
+        const messageElement = document.createElement('div');
+        messageElement.className = role;
+        messageElement.textContent = message;
+        chatboxMessages.appendChild(messageElement);
+        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+    };
+
+    chatboxSend.addEventListener('click', async () => {
+        const userInput = chatboxInput.value.trim();
+        if (userInput === '') return;
+
+        appendMessage('user', userInput);
+        chatboxInput.value = '';
+
+        try {
+            const response = await fetch('/chat', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ prompt: question })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userInput })
             });
 
             const data = await response.json();
-            responseContainer.textContent = data.choices[0].text;
+            appendMessage('assistant', data.message);
         } catch (error) {
-            responseContainer.textContent = 'Error: ' + error.message;
+            appendMessage('error', 'Error: Unable to fetch response.');
         }
-    };
+    });
 
-    document.getElementById('chat-submit').addEventListener('click', askQuestion);
-
-    // Resizable widgets
-    const widgets = document.querySelectorAll('.widget');
-    widgets.forEach(widget => {
-        const resizeHandle = widget.querySelector('.resize-handle');
-        resizeHandle.addEventListener('mousedown', startResizing);
-
-        function startResizing(e) {
-            window.addEventListener('mousemove', resize);
-            window.addEventListener('mouseup', stopResizing);
-        }
-
-        function resize(e) {
-            widget.style.width = e.clientX - widget.offsetLeft + 'px';
-            widget.style.height = e.clientY - widget.offsetTop + 'px';
-        }
-
-        function stopResizing() {
-            window.removeEventListener('mousemove', resize);
-            window.removeEventListener('mouseup', stopResizing);
+    chatboxInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            chatboxSend.click();
         }
     });
 });

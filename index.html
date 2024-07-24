@@ -8,6 +8,19 @@
 </head>
 <body>
     <div class="widget-container">
+        <!-- <div class="widget" id="chatbox-widget">
+            <h2>Chat with GPT</h2>
+            <div id="chatbox-messages"></div>
+            <input type="text" id="chatbox-input" placeholder="Type a message...">
+            <button id="chatbox-send">Send</button>
+            <div class="resize-handle"></div>
+        </div> -->
+        
+        <div class="widget" id="quote-widget">
+            <h2>Quote of the Day</h2>
+            <div id="quote"></div>
+            <div class="resize-handle"></div>
+        </div>
         <div class="widget" id="google-slides-widget">
             <h2>Google Slides</h2>
             <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ4GGyiL3-abPbE_bqI9RSn_ny9IWIm4EKpExzuDdf-Bf4XVAxYOqHohPhXcGlKGwwPgqz5sxlOml8P/embed?start=true&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
@@ -25,10 +38,13 @@
             </div>
             <button id="start-timer">Start</button>
             <button id="reset-timer">Reset</button>
+            <button id="short-break">Short Break</button>
+            <button id="long-break">Long Break</button>
             <div class="resize-handle"></div>
         </div>
         <div class="widget" id="poll-widget-container">
-            <!-- Poll widget content will be injected here by script.js -->
+            <h2>Poll</h2>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfavO8av_XGenXmjQCsM8SFI2lGd5DNmQQxyCvb_YhcccRYMw/viewform?embedded=true" width="640" height="463" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <div class="resize-handle"></div>
         </div>
         <div class="widget" id="spotify-widget">
@@ -38,20 +54,8 @@
             </div>
             <div class="resize-handle"></div>
         </div>
-    
-    <!-- ChatGPT Widget -->
-    <div class="widget" id="chat-widget">
-        <h2>ChatGPT</h2>
-        <input type="text" id="chat-input" placeholder="Ask a question...">
-        <button id="chat-submit">Ask</button>
-        <div id="chat-response"></div>
-        <div class="resize-handle"></div>
-    </div>
-    </div>
-   
-        <!-- Other widgets here -->
         
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

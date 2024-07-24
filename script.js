@@ -82,42 +82,5 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     fetchQuote();
-    const chatboxMessages = document.getElementById('chatbox-messages');
-    const chatboxInput = document.getElementById('chatbox-input');
-    const chatboxSend = document.getElementById('chatbox-send');
-
-    const appendMessage = (role, message) => {
-        const messageElement = document.createElement('div');
-        messageElement.className = role;
-        messageElement.textContent = message;
-        chatboxMessages.appendChild(messageElement);
-        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
-    };
-
-    chatboxSend.addEventListener('click', async () => {
-        const userInput = chatboxInput.value.trim();
-        if (userInput === '') return;
-
-        appendMessage('user', userInput);
-        chatboxInput.value = '';
-
-        try {
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userInput })
-            });
-
-            const data = await response.json();
-            appendMessage('assistant', data.message);
-        } catch (error) {
-            appendMessage('error', 'Error: Unable to fetch response.');
-        }
-    });
-
-    chatboxInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            chatboxSend.click();
-        }
-    });
+    
 });

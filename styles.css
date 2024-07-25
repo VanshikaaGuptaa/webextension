@@ -58,6 +58,10 @@ body {
 html {
     height: 100%;
     overflow: hidden; /* Hide scrollbar */
+    /* Add smooth scrolling */
+    scroll-behavior: smooth;
+
+
 }
 
 .scrollable-container {
@@ -66,6 +70,7 @@ html {
     width: 100%;
     padding: 20px; /* Adjust padding as needed */
 }
+
 
 /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
 .scrollable-container::-webkit-scrollbar {
@@ -91,7 +96,7 @@ html {
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 8px;
     backdrop-filter: blur(10px); 
 }
@@ -113,7 +118,7 @@ html {
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3); 
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
     border-radius: 8px;
     box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.1);
     padding: 5px;
@@ -271,7 +276,47 @@ button:hover {
 .hidden{
     display: none;
 }
+.time{
+    position: absolute;
+    /* align-self: center; */
+    /* margin-top:10px; */
+    /* margin-bottom: 50px; */
+    right: 42%;
+    top:40px;
+    font-size: 70px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+/* Scrolling Announcements Widget */
+#announcements-widget {
+    width: 400px; /* Default width */
+    height: 200px; /* Default height */
+    overflow: hidden;
+}
 
+.announcements-content {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#announcements {
+    position: absolute;
+    width: 100%;
+    white-space: nowrap;
+    animation: scroll 20s linear infinite;
+    font-size: 1.2em;
+    color: white;
+    padding: 10px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
 
 /* Circle background effect */
 /* .circle {

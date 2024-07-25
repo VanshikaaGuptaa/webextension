@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const updateTimeDisplay = () => {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}`;
+        document.querySelector('.time h1').textContent = timeString;
+    };
+
+    // Update the time display every second
+    setInterval(updateTimeDisplay, 1000);
+
+    // Initial call to set the time immediately
+    updateTimeDisplay();
     // Variables for Pomodoro Timer
     let minutes = 25;
     let seconds = 0;
@@ -269,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
            frequentWebsitesList.appendChild(listItem);
        }
    });
+   
     
 
 });

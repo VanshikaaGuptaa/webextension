@@ -83,4 +83,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetchQuote();
     
+    // To-Do List functionality
+    const todoList = document.getElementById('todo-list');
+    const newTodoInput = document.getElementById('new-todo');
+    const addTodoButton = document.getElementById('add-todo');
+
+    const addTodo = (text) => {
+        const listItem = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        const span = document.createElement('span');
+        span.textContent = text;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => {
+            listItem.remove();
+        });
+
+        listItem.appendChild(checkbox);
+        listItem.appendChild(span);
+        listItem.appendChild(deleteButton);
+        todoList.appendChild(listItem);
+    };
+
+    addTodoButton.addEventListener('click', () => {
+        const text = newTodoInput.value.trim();
+        if (text !== '') {
+            addTodo(text);
+            newTodoInput.value = '';
+        }
+    });
+
+    newTodoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const text = newTodoInput.value.trim();
+            if (text !== '') {
+                addTodo(text);
+                newTodoInput.value = '';
+            }
+        }
+    });
 });

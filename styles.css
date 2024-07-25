@@ -100,9 +100,10 @@ html {
 .widget-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Space between widgets */
+    gap: 10px; /* Space between widgets */
     justify-content: center;
     padding: 1px;
+    margin: 5px;
 }
 
 /* Style for each widget */

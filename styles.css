@@ -3,10 +3,97 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    overflow: hidden; /* Hide scrollbar */
+    /* background: #3399ff; Background color for the body */
+    background-image: url(a48c5c6d31119800605ef0de228e4631.png) ;
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: cover; /* Scale the image to cover the entire background */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; 
+}
+#buttons{
+    display: flex; /* Enable flexbox layout */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    list-style-type: none; 
+}
+#start-timer{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #000(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    /* padding: 10px; */
+}
+#reset-timer{
+   
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        background-color: #000(0,0,0,0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        /* padding: 10px; */
+    
+}
+
+#short-break{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 20px;
+    background-color: #000(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    
+}
+#long-break{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #000(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+/* Hide scrollbar for all browsers */
+html {
+    height: 100%;
+    overflow: hidden; /* Hide scrollbar */
+}
+
+.scrollable-container {
+    overflow: auto; /* Enable scrolling for the container */
+    height: 100%;
+    width: 100%;
+    padding: 20px; /* Adjust padding as needed */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.scrollable-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+.scrollable-container {
+    scrollbar-width: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollable-container {
+    -ms-overflow-style: none; /* Hide scrollbar */
+}
+
+/* Quote widget styles */
+.quote-widget {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px); 
 }
 
 /* Container for widgets */
@@ -15,30 +102,32 @@ body {
     flex-wrap: wrap;
     gap: 20px; /* Space between widgets */
     justify-content: center;
-    padding: 20px;
+    padding: 1px;
 }
 
 /* Style for each widget */
 .widget {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: rgba(0, 0, 0, 0.3); 
+    border: 1px solid #000000;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px;
     width: 300px; /* Default width */
     height: 300px; /* Default height */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     position: relative; /* Needed for the resize handle positioning */
     overflow: hidden;
+    backdrop-filter: blur(10px); /* Apply blur effect */
 }
 
 /* Resize handle */
 .resize-handle {
-    width: 20px;
-    height: 20px;
+    width: 8px;
+    height: 8px;
     background-color: #000;
     position: absolute;
     bottom: 0;
@@ -61,33 +150,7 @@ iframe {
 }
 
 /* Style for buttons */
-button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
 
-/* Style for Spotify widget */
-#spotify-widget {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#spotify-iframe {
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
 
 /* Style for poll widget options */
 .poll-option {
@@ -95,36 +158,12 @@ button:hover {
     margin-bottom: 5px;
 }
 
-#chatbox-widget {
-    display: flex;
-    flex-direction: column;
-    height: 300px;
-}
-
-#chatbox-messages {
-    flex: 1;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-#chatbox-input {
-    width: calc(100% - 80px);
-    padding: 10px;
-    margin-top: 10px;
-}
-
-#chatbox-send {
-    padding: 10px;
-    margin-top: 10px;
-    width: 60px;
-}
 /* Meta widget button */
 .meta-widget-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 50%;
@@ -134,8 +173,12 @@ button:hover {
     z-index: 1000;
 }
 
+.meta-widget-button :hover{
+    background-color: #373b3f;
+}
 /* Meta widget modal */
 .meta-widget-modal {
+    
     display: none;
     position: fixed;
     z-index: 1001;
@@ -148,7 +191,9 @@ button:hover {
 }
 
 .meta-widget-modal-content {
-    background-color: #fefefe;
+    
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #f0f0f0;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -157,28 +202,150 @@ button:hover {
     border-radius: 8px;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
     cursor: pointer;
 }
 
-#widget-list {
-    margin-top: 20px;
+/* Additional styles for specific widgets */
+#todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px;
+    font-size: 15px;
+    color: #fff;
+    
 }
 
-#widget-list label {
-    display: block;
+#todo-list li {
     margin-bottom: 10px;
+    
 }
-.hidden {
-    display: none !important;
+
+#new-todo {
+    width: calc(100% - 60px);
+    padding: 5px;
+    margin-top: 10px;
 }
+
+
+#timer{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px;
+    margin: 30px;
+}
+#new-todo{
+    background:none;
+    border: none;
+    color: #f0f0f0;
+}
+button {
+    margin: 5px;
+    padding: 10px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); 
+    color: white;
+    cursor: pointer;
+}
+
+
+
+button:hover {
+    background-color: #262b31;
+}
+#add-todo{
+    width:80%;
+    padding: 10px 30px;
+}
+#spotify-widget{
+    height: 180px;
+}
+.hidden{
+    display: none;
+}
+
+
+/* Circle background effect */
+/* .circle {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: ripple 15s infinite;
+    box-shadow: 0px 0px 1px 0px #508fb9;
+}
+
+.small {
+    width: 200px;
+    height: 200px;
+    left: -100px;
+    bottom: -100px;
+}
+
+.medium {
+    width: 400px;
+    height: 400px;
+    left: -200px;
+    bottom: -200px;
+}
+
+.large {
+    width: 600px;
+    height: 600px;
+    left: -300px;
+    bottom: -300px;
+}
+
+.xlarge {
+    width: 800px;
+    height: 800px;
+    left: -400px;
+    bottom: -400px;
+}
+
+.xxlarge {
+    width: 1000px;
+    height: 1000px;
+    left: -500px;
+    bottom: -500px;
+}
+
+.shade1 {
+    opacity: 0.2;
+}
+
+.shade2 {
+    opacity: 0.5;
+}
+
+.shade3 {
+    opacity: 0.7;
+}
+
+.shade4 {
+    opacity: 0.8;
+}
+
+.shade5 {
+    opacity: 0.9;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+} */

@@ -10,68 +10,77 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
-    <div class="widget-container">
-        <div class="widget" id="google-calendar-widget">
-            <h2>Google Calendar</h2>
-            <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=your_timezone&mode=DAY" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-            <div class="resize-handle"></div>
-        </div>
-        
-        <div class="widget" id="quote-widget">
-            <h2>Quote of the Day</h2>
+    <div class='ripple-background'>
+        <div class='circle xxlarge shade1'></div>
+        <div class='circle xlarge shade2'></div>
+        <div class='circle large shade3'></div>
+        <div class='circle mediun shade4'></div>
+        <div class='circle small shade5'></div>
+      </div>
+    <div class="scrollable-container">
+        <div id="quote-widget" class="quote-widget">
             <div id="quote"></div>
-            <div class="resize-handle"></div>
         </div>
-        <div class="widget" id="google-slides-widget">
-            <h2>Google Slides</h2>
-            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ4GGyiL3-abPbE_bqI9RSn_ny9IWIm4EKpExzuDdf-Bf4XVAxYOqHohPhXcGlKGwwPgqz5sxlOml8P/embed?start=true&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-            <div class="resize-handle"></div>
-        </div>
-        <div class="widget" id="google-spreadsheet-widget">
-            <h2>Google Spreadsheet</h2>
-            <iframe src="https://docs.google.com/spreadsheets/d/1D7D_aS-OkQVFMDF-2GCV2mryJ0ChQFuhiyYWRJvmu6o/edit?gid=0#gid=0" frameborder="0" allowfullscreen="true"></iframe>
-            <div class="resize-handle"></div>
-        </div>
-        <div class="widget" id="pomodoro-widget">
-            <h2>Pomodoro Timer</h2>
-            <div id="timer">
-                <span id="minutes">25</span>:<span id="seconds">00</span>
+        <div class="widget-container">
+            <div class="widget" id="pomodoro-widget">
+                <ul id="buttons">
+               
+                   <li> <button id="short-break">Short Break</button>
+                    <li><button id="long-break">Long Break</button>
+                    </ul>
+                
+                <div id="timer">
+                    <span id="minutes">25</span>:<span id="seconds">00</span>
+                </div>
+                <button id="start-timer">Start</button>
+                <button id="reset-timer">Reset</button>
+                <div class="resize-handle"></div>
             </div>
-            <button id="start-timer">Start</button>
-            <button id="reset-timer">Reset</button>
-            <button id="short-break">Short Break</button>
-            <button id="long-break">Long Break</button>
-            <div class="resize-handle"></div>
-        </div>
-        <div class="widget" id="poll-widget-container">
-            <h2>Poll</h2>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfavO8av_XGenXmjQCsM8SFI2lGd5DNmQQxyCvb_YhcccRYMw/viewform?embedded=true" width="640" height="463" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-            <div class="resize-handle"></div>
-        </div>
-        <div class="widget" id="spotify-widget">
-            <h2>Spotify Player</h2>
-            <div id="spotify-player">
-                <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div>
-            <div class="resize-handle"></div>
-        </div>
-        <div class="widget" id="todo-widget">
-            <h2>To-Do List</h2>
-            <ul id="todo-list"></ul>
-            <input type="text" id="new-todo" placeholder="Add a new task...">
-            <button id="add-todo">Add</button>
-            <div class="resize-handle"></div>
-        </div>
-    </div>
-    <div id="meta-widget-button" class="meta-widget-button">☰</div>
+            
 
-    <!-- Meta widget modal -->
-    <div id="meta-widget-modal" class="meta-widget-modal">
-        <div class="meta-widget-modal-content">
-            <span id="close-meta-widget" class="close">&times;</span>
-            <h2>Manage Widgets</h2>
-            <div id="widget-list">
-                <!-- List of widgets with checkboxes will be dynamically added here -->
+            <div class="widget" id="google-slides-widget">
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ4GGyiL3-abPbE_bqI9RSn_ny9IWIm4EKpExzuDdf-Bf4XVAxYOqHohPhXcGlKGwwPgqz5sxlOml8P/embed?start=true&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <div class="resize-handle"></div>
+            </div>
+            <div class="widget" id="google-spreadsheet-widget">
+                <iframe src="https://docs.google.com/spreadsheets/d/1D7D_aS-OkQVFMDF-2GCV2mryJ0ChQFuhiyYWRJvmu6o/edit?gid=0#gid=0" frameborder="0" allowfullscreen="true"></iframe>
+                <div class="resize-handle"></div>
+            </div>
+            <div class="widget" id="google-calendar-widget">
+                <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=your_timezone&mode=DAY" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                <div class="resize-handle"></div>
+            </div>
+
+
+            <div class="widget" id="todo-widget">
+                <ul id="todo-list"></ul>
+                <input type="text" id="new-todo" placeholder="Add a new task...">
+                <hr width="80%">
+                <button id="add-todo">Add</button>
+                <div class="resize-handle"></div>
+            </div>
+            
+            <div class="widget" id="spotify-widget">
+                <div id="spotify-player">
+                    <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+                <div class="resize-handle"></div>
+            </div>
+            
+            <div class="widget" id="poll-widget-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfavO8av_XGenXmjQCsM8SFI2lGd5DNmQQxyCvb_YhcccRYMw/viewform?embedded=true" width="640" height="463" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <div class="resize-handle"></div>
+            </div>
+
+        </div>
+        <div id="meta-widget-button" class="meta-widget-button">☰</div>
+        <div id="meta-widget-modal" class="meta-widget-modal">
+            <div class="meta-widget-modal-content">
+                <span id="close-meta-widget" class="close">&times;</span>
+                <h2>Manage Widgets</h2>
+                <div id="widget-list">
+                    <!-- List of widgets with checkboxes will be dynamically added here -->
+                </div>
             </div>
         </div>
     </div>

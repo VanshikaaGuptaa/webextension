@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to start a long break
     const startLongBreak = () => {
         clearInterval(timer);
-        minutes = 15;
+        minutes = 45;
         seconds = 0;
         updateTimerDisplay();
         startTimer();
@@ -211,5 +211,64 @@ document.addEventListener('DOMContentLoaded', function () {
             widgetElement.classList.remove('hidden');
         }
     });
+    const recentWebsitesList = document.getElementById('recently-visited-list');
+    
+    // Clear the loading message
+    recentWebsitesList.innerHTML = '';
+
+    chrome.history.search({text: '', maxResults: 5}, (data) => {
+        data.forEach(page => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = page.url;
+            link.textContent = page.title || page.url;
+            link.target = '_blank';
+            listItem.appendChild(link);
+            recentWebsitesList.appendChild(listItem);
+        });
+
+        if (data.length === 0) {
+            const listItem = document.createElement('li');
+            listItem.textContent = 'No recent websites found.';
+            recentWebsitesList.appendChild(listItem);
+        }
+    });
+
+     // Fetch and display the user's frequently visited websites
+   const frequentWebsitesList = document.getElementById('frequenty-visited-list');
+   frequentWebsitesList.innerHTML = ''; // Clear the loading message
+
+   chrome.history.search({text: '', maxResults: 1000}, (data) => {
+       const visitCounts = {};
+
+       data.forEach(page => {
+           const domain = new URL(page.url).hostname;
+           if (visitCounts[domain]) {
+               visitCounts[domain] += page.visitCount;
+           } else {
+               visitCounts[domain] = page.visitCount;
+           }
+       });
+
+       const sortedVisitCounts = Object.entries(visitCounts).sort((a, b) => b[1] - a[1]);
+       const topSites = sortedVisitCounts.slice(0, 5);
+
+       topSites.forEach(([domain, count]) => {
+           const listItem = document.createElement('li');
+           const link = document.createElement('a');
+           link.href = `http://${domain}`;
+           link.textContent = `${domain} (${count} visits)`;
+           link.target = '_blank';
+           listItem.appendChild(link);
+           frequentWebsitesList.appendChild(listItem);
+       });
+
+       if (topSites.length === 0) {
+           const listItem = document.createElement('li');
+           listItem.textContent = 'No frequently visited websites found.';
+           frequentWebsitesList.appendChild(listItem);
+       }
+   });
+    
 
 });

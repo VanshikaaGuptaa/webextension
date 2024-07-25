@@ -153,5 +153,63 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    const metaWidgetButton = document.getElementById('meta-widget-button');
+    const metaWidgetModal = document.getElementById('meta-widget-modal');
+    const closeMetaWidget = document.getElementById('close-meta-widget');
+    const widgetList = document.getElementById('widget-list');
+    
+    const widgets = [
+        { id: 'google-calendar-widget', name: 'Google Calendar' },
+        { id: 'quote-widget', name: 'Quote of the Day' },
+        { id: 'google-slides-widget', name: 'Google Slides' },
+        { id: 'google-spreadsheet-widget', name: 'Google Spreadsheet' },
+        { id: 'pomodoro-widget', name: 'Pomodoro Timer' },
+        { id: 'poll-widget-container', name: 'Poll' },
+        { id: 'spotify-widget', name: 'Spotify Player' }
+    ];
+
+    const createWidgetList = () => {
+        widgetList.innerHTML = '';
+        widgets.forEach(widget => {
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = !document.getElementById(widget.id).classList.contains('hidden');
+            checkbox.addEventListener('change', () => {
+                const widgetElement = document.getElementById(widget.id);
+                if (checkbox.checked) {
+                    widgetElement.classList.remove('hidden');
+                } else {
+                    widgetElement.classList.add('hidden');
+                }
+            });
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(` ${widget.name}`));
+            widgetList.appendChild(label);
+        });
+    };
+
+    metaWidgetButton.addEventListener('click', () => {
+        createWidgetList();
+        metaWidgetModal.style.display = 'block';
+    });
+
+    closeMetaWidget.addEventListener('click', () => {
+        metaWidgetModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == metaWidgetModal) {
+            metaWidgetModal.style.display = 'none';
+        }
+    });
+
+    // Hide widgets initially based on previous state (optional)
+    widgets.forEach(widget => {
+        const widgetElement = document.getElementById(widget.id);
+        if (!widgetElement.classList.contains('hidden')) {
+            widgetElement.classList.remove('hidden');
+        }
+    });
 
 });

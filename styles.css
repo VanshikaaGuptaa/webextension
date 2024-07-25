@@ -317,7 +317,35 @@ button:hover {
         transform: translateX(-100%);
     }
 }
+/* Spreadsheet Widget Styles */
+#spreadsheet-widget {
+    width: 100%;
+    max-height: 400px; /* Adjust as needed */
+    overflow: auto;
+}
 
+#spreadsheet-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#spreadsheet-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+h2{
+    color: #f0f0f0;
+}
+a{
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+#frequently-visited-sites-widget
+{
+    align-items: center;
+}
 /* Circle background effect */
 /* .circle {
     position: absolute;

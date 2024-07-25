@@ -284,6 +284,42 @@ document.addEventListener('DOMContentLoaded', function () {
        }
    });
    
-    
+   const fetchSpreadsheetData = async () => {
+    const list = document.getElementById('spreadsheet-list');
+
+    // Replace with your actual published CSV URL
+    const spreadsheetId = '2PACX-1vTWc-Lh2I3p-FPj7pxUUUtN79n4e3V1ukBv_aOEkXkptkuTZVTxmoHBdhqwcHifguv-6adIYomwRr6i'; // Replace with your Spreadsheet ID
+    const csvUrl = `https://docs.google.com/spreadsheets/d/e/${spreadsheetId}/pub?output=csv`;
+
+    console.log('Fetching data from:', csvUrl); // Debugging line
+
+    try {
+        const response = await fetch(csvUrl);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const csvText = await response.text();
+        
+        console.log('CSV Data:', csvText); // Debugging line
+
+        // Parse CSV data
+        const rows = csvText.split('\n').map(row => row.split(','));
+
+        // Clear existing list items
+        list.innerHTML = '';
+
+        // Add rows to the list
+        rows.forEach(row => {
+            const listItem = document.createElement('li');
+            listItem.textContent = row.join(' - '); // Customize how you want to join the columns
+            list.appendChild(listItem);
+        });
+    } catch (error) {
+        console.error('Error fetching data:', error); // Debugging line
+        list.innerHTML = 'Error: Unable to fetch data.';
+    }
+};
+
+fetchSpreadsheetData();
 
 });

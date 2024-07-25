@@ -37,13 +37,13 @@ body {
 
 /* Resize handle */
 .resize-handle {
-    width: 10px; /* Smaller width */
-    height: 10px; /* Smaller height */
-    background-color: #000; /* Black color */
+    width: 20px;
+    height: 20px;
+    background-color: #000;
     position: absolute;
     bottom: 0;
     right: 0;
-    cursor: se-resize; /* Southeast resize cursor */
+    cursor: se-resize;
 }
 
 /* Style for iframe elements */
@@ -94,6 +94,7 @@ button:hover {
     display: block;
     margin-bottom: 5px;
 }
+
 #chatbox-widget {
     display: flex;
     flex-direction: column;

@@ -125,4 +125,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // Functionality to resize widgets
+    const resizableElements = document.querySelectorAll('.widget');
+
+    resizableElements.forEach(widget => {
+        const resizeHandle = widget.querySelector('.resize-handle');
+
+        resizeHandle.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            document.documentElement.addEventListener('mousemove', onMouseMove);
+            document.documentElement.addEventListener('mouseup', onMouseUp);
+
+            let startX = e.clientX;
+            let startY = e.clientY;
+            let startWidth = parseInt(document.defaultView.getComputedStyle(widget).width, 10);
+            let startHeight = parseInt(document.defaultView.getComputedStyle(widget).height, 10);
+
+            function onMouseMove(e) {
+                widget.style.width = startWidth + e.clientX - startX + 'px';
+                widget.style.height = startHeight + e.clientY - startY + 'px';
+            }
+
+            function onMouseUp() {
+                document.documentElement.removeEventListener('mousemove', onMouseMove);
+                document.documentElement.removeEventListener('mouseup', onMouseUp);
+            }
+        });
+    });
+
 });

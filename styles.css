@@ -345,6 +345,7 @@ a{
 #frequently-visited-sites-widget
 {
     align-items: center;
+    left: 10%;
 }
 /* Circle background effect */
 /* .circle {
